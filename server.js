@@ -1356,10 +1356,13 @@ app.get('*', (req, res) => {
   }
 });
 
-app.listen(PORT, () => {
-  console.log(`\n🚀 Server running on http://localhost:${PORT}`);
-  console.log('📧 Email notifications: ' + (emailEnabled ? 'ENABLED ✅' : 'DISABLED ❌'));
-  console.log(`🔍 Visit http://localhost:${PORT} to start using the warehouse management system\n`);
-});
+if (process.env.VERCEL !== '1') {
+  app.listen(PORT, () => {
+    console.log(`\n🚀 Server running on http://localhost:${PORT}`);
+    console.log('📧 Email notifications: ' + (emailEnabled ? 'ENABLED ✅' : 'DISABLED ❌'));
+    console.log(`🔍 Visit http://localhost:${PORT} to start using the warehouse management system\n`);
+  });
+}
 
 export default app;
+
