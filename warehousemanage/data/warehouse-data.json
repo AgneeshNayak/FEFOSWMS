@@ -1,0 +1,69 @@
+{
+  "users": [
+    {
+      "id": "user_test_1784279434352",
+      "name": "Test User",
+      "email": "test_1784279434353@example.com",
+      "company": "Test Company",
+      "password": "hashedpassword",
+      "createdAt": 1784279434353,
+      "createdat": 1784279434353,
+      "lastLogin": null,
+      "isActive": 1
+    },
+    {
+      "id": "user_test_1784279440113",
+      "name": "Test User",
+      "email": "test_1784279440113@example.com",
+      "company": "Test Company",
+      "password": "hashedpassword",
+      "createdAt": 1784279440113,
+      "createdat": 1784279440113,
+      "lastLogin": null,
+      "isActive": 1
+    },
+    {
+      "id": "user_1784279743342",
+      "name": "John Doe",
+      "email": "user_1784279740190@example.com",
+      "company": "ACME Corp",
+      "password": "$2b$10$LGQE5ZBPmKGAYSHeH2tIWuIS5XdfeOCxoM5LdfeNbcM3LBppX9sri",
+      "createdAt": 1784279743342,
+      "createdat": 1784279743342,
+      "lastLogin": 1784279748548,
+      "isActive": 1
+    },
+    {
+      "id": "user_1784279850976",
+      "name": "Agneesh Nayak",
+      "email": "agneeshnayak45@gmail.com",
+      "company": "CEC",
+      "password": "$2b$10$ZDmj87CZfTDNA4rLLUT1Se753PrawtE4JpG.76iw8yVY0ZHKxd7oa",
+      "createdAt": 1784279850976,
+      "createdat": 1784279850976,
+      "lastLogin": 1784280589279,
+      "isActive": 1
+    }
+  ],
+  "products": [
+    {
+      "id": "123",
+      "name": "Rice",
+      "category": "Food",
+      "qty": 30,
+      "price": 60,
+      "expiry": "2026-07-20",
+      "low": 10,
+      "createdAt": 1784279880391,
+      "createdat": 1784279880391,
+      "userId": "user_1784279850976",
+      "userid": "user_1784279850976",
+      "company": "CEC"
+    }
+  ],
+  "orders": [],
+  "order_items": [],
+  "dispatches": [],
+  "sessions": [],
+  "email_logs": []
+}

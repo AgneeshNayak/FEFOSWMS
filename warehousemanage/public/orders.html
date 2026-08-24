@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Orders • Warehouse</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-page="orders">
+  
+  <div class="sidebar">
+    <div>
+      <div class="logo"><a href="dashboard.html">📦 Warehouse</a></div>
+      <ul class="menu">
+        <li><a href="dashboard.html">📊 Dashboard</a></li>
+        <li><a href="inventory.html">📦 Products</a></li>
+        <li><a href="orders.html">🧾 Orders</a></li>
+        <li><a href="dispatch.html">🚚 Dispatch</a></li>
+        <li><a href="reports.html">📑 Reports</a></li>
+      </ul>
+    </div>
+    <div style="padding:16px">
+      <div class="footer-note">Server-backed • PostgresSQL</div>
+    </div>
+  </div>
+
+  <div class="main">
+    
+  <div class="topbar">
+    <div>
+      <button class="menu-toggle">☰ Menu</button>
+      <h2 style="display:inline-block;margin-left:8px">Orders</h2>
+      <p style="margin-top:4px">Create orders. If stock is available, dispatch is created automatically.</p>
+    </div>
+    <div class="status">
+      <div class="badge" id="online">✔ System Online</div>
+      <div class="clock" id="clock">--</div>
+      <div class="notification-icon" id="notificationBell">
+        <span>🔔</span>
+        <div class="notification-badge" id="notificationCount">0</div>
+      </div>
+    </div>
+  </div>
+
+    <div class="panel">
+      <h3 style="margin-bottom:12px">New Order</h3>
+      <form id="orderForm">
+        <div class="grid grid-3">
+          <div><label>Order ID (optional)</label><input name="id" class="input" placeholder="Auto-generate"></div>
+          <div><label>Customer</label><input name="customer" class="input" required></div>
+          <div><label>Date</label><input name="date" type="date" class="input" value="2025-08-23"></div>
+        </div>
+        <div class="panel" style="margin-top:12px">
+          <div class="grid grid-3">
+            <div>
+              <label>Choose Item</label>
+              <select id="itemBuilder" class="input"></select>
+            </div>
+            <div>
+              <label>Qty</label>
+              <input id="itemQty" type="number" min="1" value="1" class="input">
+            </div>
+            <div style="display:flex;align-items:flex-end">
+              <button class="btn" type="button" id="addItem">Add Item</button>
+            </div>
+          </div>
+          <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap" id="itemsList"></div>
+          <input type="hidden" id="items" name="items" value="[]">
+        </div>
+        <div style="margin-top:12px"><button class="btn primary" type="submit">Create Order</button></div>
+      </form>
+    </div>
+
+    <div class="panel" style="margin-top:16px">
+      <h3 style="margin-bottom:8px">Orders</h3>
+      <div style="overflow:auto">
+        <table class="table">
+          <thead><tr><th>Order ID</th><th>Customer</th><th>Items</th><th>Status</th><th>Date</th></tr></thead>
+          <tbody id="orderBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <div id="alertsSidebar" class="alerts-sidebar">
+    <div class="alerts-header">
+      <h3>Urgent Actions Required</h3>
+      <button id="closeAlerts">✖</button>
+    </div>
+    <div id="alertsList">Loading alerts...</div>
+  </div>
+  <script src="script.js"></script>
+</body></html>

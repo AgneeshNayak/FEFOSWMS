@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dispatch • Warehouse</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-page="dispatch">
+  
+  <div class="sidebar">
+    <div>
+      <div class="logo"><a href="dashboard.html">📦 Warehouse</a></div>
+      <ul class="menu">
+        <li><a href="dashboard.html">📊 Dashboard</a></li>
+        <li><a href="inventory.html">📦 Products</a></li>
+        <li><a href="orders.html">🧾 Orders</a></li>
+        <li><a href="dispatch.html">🚚 Dispatch</a></li>
+        <li><a href="reports.html">📑 Reports</a></li>
+      </ul>
+    </div>
+    <div style="padding:16px">
+      <div class="footer-note">Server-backed • PostgresSQL</div>
+    </div>
+  </div>
+
+  <div class="main">
+    
+  <div class="topbar">
+    <div>
+      <button class="menu-toggle">☰ Menu</button>
+      <h2 style="display:inline-block;margin-left:8px">Orders</h2>
+      <p style="margin-top:4px">View and manage dispatch records. Track shipment status and transportation details.</p>
+    </div>
+    <div class="status">
+      <div class="badge" id="online">✔ System Online</div>
+      <div class="clock" id="clock">--</div>
+      <div class="notification-icon" id="notificationBell">
+        <span>🔔</span>
+        <div class="notification-badge" id="notificationCount">0</div>
+      </div>
+    </div>
+  </div>
+
+    <div class="panel">
+      <h3 style="margin-bottom:8px">Dispatches</h3>
+      <div style="overflow:auto">
+        <table class="table">
+          <thead><tr><th>Dispatch ID</th><th>Order ID</th><th>Transport</th><th>Status</th></tr></thead>
+          <tbody id="dispatchBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <div id="alertsSidebar" class="alerts-sidebar">
+    <div class="alerts-header">
+      <h3>Urgent Actions Required</h3>
+      <button id="closeAlerts">✖</button>
+    </div>
+    <div id="alertsList">Loading alerts...</div>
+  </div>
+  <script src="script.js"></script>
+</body></html>

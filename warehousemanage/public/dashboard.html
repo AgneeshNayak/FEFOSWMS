@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Warehouse Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-page="dashboard">
+  <div class="sidebar">
+    <div>
+      <div class="logo"><a href="dashboard.html">📦 Warehouse Pro</a></div>
+      <ul class="menu">
+        <li><a href="dashboard.html">📊 Dashboard</a></li>
+        <li><a href="inventory.html">📦 Products</a></li>
+        <li><a href="orders.html">🧾 Orders</a></li>
+        <li><a href="dispatch.html">🚚 Dispatch</a></li>
+        <li><a href="reports.html">📑 Reports</a></li>
+      </ul>
+    </div>
+    <div style="padding:16px">
+      <div class="user-info">
+        <div class="user-name">Loading...</div>
+        <div class="user-company" style="font-size:12px;color:#666;">Loading...</div>
+        <button class="btn btn-sm" data-logout style="margin-top:8px;width:100%;font-size:12px;">Logout ⏻</button>
+      </div>
+      <div class="footer-note" style="margin-top:12px;">Secure • PostgresSQL</div>
+    </div>
+  </div>
+
+  <div class="main">
+    <div class="topbar">
+      <div>
+        <button class="menu-toggle">☰ Menu</button>
+        <h2 style="display:inline-block;margin-left:8px">Warehouse Dashboard</h2>
+        <p style="margin-top:4px">Real-time inventory management and analytics</p>
+        <p class="welcome-message" style="margin-top:4px;color:#666;font-weight:500;">Welcome!</p>
+      </div>
+      <div class="status">
+        <div class="badge" id="online">✔ System Online</div>
+        <div class="clock" id="clock">--</div>
+        <div class="notification-icon" id="notificationBell">
+          <span>🔔</span>
+          <div class="notification-badge" id="notificationCount">0</div>
+        </div>
+        <div id="profileTrigger" class="profile-trigger">
+          <span id="userInitials"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="cards">
+      <a href="inventory.html" class="card-link">
+        <div class="card blue">
+          <h3>Total Products <span></span></h3>
+          <p id="totalProducts">0</p>
+          <span>All SKUs in inventory</span>
+          <div class="card-trend">📈</div>
+        </div>
+      </a>
+      
+      <div class="card green">
+        <h3>Safe Products <span></span></h3>
+        <p id="safeProducts">0</p>
+        <span>Within safe expiry limits</span>
+        <div class="card-trend">📊</div>
+      </div>
+      
+      <div class="card yellow">
+        <h3>Expiring Soon <span></span></h3>
+        <p id="soonExpire">0</p>
+        <span>Next 30 days</span>
+        <div class="card-trend">⏱️</div>
+      </div>
+      
+      <div class="card red">
+        <h3>Expired Items <span></span></h3>
+        <p id="expired">0</p>
+        <span>Immediate action required</span>
+        <div class="card-trend">🚨</div>
+      </div>
+      
+      <div class="card orange">
+        <h3>Low Stock <span>📉</span></h3>
+        <p id="lowStock">0</p>
+        <span>Below safety threshold</span>
+        <div class="card-trend"></div>
+      </div>
+      
+      <div class="card purple">
+        <h3>Recently Added <span>⏰</span></h3>
+        <p id="recentAdded">0</p>
+        <span>Past 7 days</span>
+        <div class="card-trend"></div>
+      </div>
+      
+      <a href="dispatch.html" class="card-link">
+        <div class="card lightblue">
+          <h3>Ready to Ship <span></span></h3>
+          <p id="dispatchReady">0</p>
+          <span>Awaiting dispatch</span>
+          <div class="card-trend">🎯</div>
+        </div>
+      </a>
+      
+      <div class="card green">
+        <h3>Inventory Value <span>💰</span></h3>
+        <p id="inventoryValue">₹0</p>
+        <span>Total inventory worth</span>
+        <div class="card-trend"></div>
+      </div>
+    </div>
+    
+    <div class="analytics-section">
+      <div class="section-header">
+        <h2>Business Intelligence</h2>
+        <p>Advanced analytics and insights for your warehouse operations</p>
+      </div>
+      
+      <div class="charts-grid">
+        <div class="chart-container large">
+          <div class="chart-header">
+            <h3>📊 Inventory Analysis by Category</h3>
+            <p>Product distribution and value across categories</p>
+          </div>
+          <div class="chart-wrapper">
+            <canvas id="categoryChart"></canvas>
+          </div>
+          <div class="chart-insights">
+            <div class="insight-item">
+              <span class="insight-label">Most Stocked:</span>
+              <span class="insight-value" id="topCategory">--</span>
+            </div>
+            <div class="insight-item">
+              <span class="insight-label">Highest Value:</span>
+              <span class="insight-value" id="valuableCategory">--</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="chart-container large">
+          <div class="chart-header">
+            <h3>🎯 Product Status Overview</h3>
+            <p>Health status and risk assessment of inventory</p>
+          </div>
+          <div class="chart-wrapper">
+            <canvas id="expiryChart"></canvas>
+          </div>
+          <div class="chart-insights">
+            <div class="insight-item">
+              <span class="insight-label">Health Score:</span>
+              <span class="insight-value" id="healthScore">--</span>
+            </div>
+            <div class="insight-item">
+              <span class="insight-label">Risk Level:</span>
+              <span class="insight-value" id="riskLevel">--</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="quick-stats">
+        <div class="stat-item">
+          <div class="stat-icon">📈</div>
+          <div class="stat-content">
+            <h4>Average Product Value</h4>
+            <span id="avgValue">₹0</span>
+          </div>
+        </div>
+        
+        <div class="stat-item">
+          <div class="stat-icon">🔄</div>
+          <div class="stat-content">
+            <h4>Turnover Rate</h4>
+            <span id="turnoverRate">0%</span>
+          </div>
+        </div>
+        
+        <div class="stat-item">
+          <div class="stat-icon">⚡</div>
+          <div class="stat-content">
+            <h4>Orders This Week</h4>
+            <span id="weeklyOrders">0</span>
+          </div>
+        </div>
+        
+        <div class="stat-item">
+          <div class="stat-icon">🎯</div>
+          <div class="stat-content">
+            <h4>Fulfillment Rate</h4>
+            <span id="fulfillmentRate">0%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3.0.0/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+  
+  <div id="alertsSidebar" class="alerts-sidebar">
+    <div class="alerts-header">
+      <h3>🚨 Urgent Actions Required</h3>
+      <button id="closeAlerts">✖</button>
+    </div>
+    <div id="alertsList">Loading alerts...</div>
+  </div>
+  
+  <script src="script.js"></script>
+  
+  <script>
+    // Initialize enhanced charts when dashboard loads
+    if(document.body.getAttribute('data-page')==='dashboard'){
+      document.addEventListener('DOMContentLoaded', async () => {
+        // Wait a bit for the API to be ready
+        setTimeout(async () => {
+          await initCharts();
+          // The interval function in the old script.js was missing a definition 
+          // (it was calling updateEnhancedMetrics which wasn't fully defined/used in initCharts). 
+          // Keeping the structure but removing the unsupported function call.
+          
+          // Update insights periodically
+          setInterval(async () => {
+            // No action needed here as we don't have a separate updateEnhancedMetrics function in the original
+          }, 30000); 
+        }, 500);
+      });
+    }
+  </script>
+  
+  <div id="profileSidebar" class="profile-sidebar">
+    <div class="profile-header">
+        <h3>User Profile</h3>
+        <button id="closeProfile" class="close-btn">✖</button>
+    </div>
+    <div class="profile-content">
+        <div class="profile-avatar">
+            <span id="profileInitials"></span>
+        </div>
+        <h4 id="profileName">Loading...</h4>
+        <p id="profileEmail">Loading...</p>
+        <p id="profileCompany" class="company-tag">Loading...</p>
+    </div>
+    <div class="profile-content">
+    </div>
+<div class="profile-actions">
+    <button id="editProfileBtn" class="btn primary" style="width: 100%;">Edit Profile</button>
+</div>
+<div class="profile-actions">
+    <button id="changepassword" class="btn primary" style="width: 100%;">Change Password</button>
+</div>
+<div class="profile-footer">
+    </div>
+    <div class="profile-footer">
+        
+    </div>
+</div>
+<div id="overlay" class="overlay"></div>
+
+
+<div id="editProfileModal" class="modal-container">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Edit Profile</h2>
+            <button id="closeModalBtn" class="close-btn">✖</button>
+        </div>
+        <form id="editProfileForm">
+            <div class="form-group">
+                <label for="editName">Full Name</label>
+                <input type="text" id="editName" class="input" required>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" id="cancelBtn" class="btn">Cancel</button>
+                <button type="submit" class="btn primary">Save Changes</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="changepasswordl" class="modal-container">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Change Password</h2>
+            <button id="closePasswordModal" class="close-btn">✖</button> 
+        </div>
+        <form id="changePasswordForm"> 
+            <div class="form-group">
+                <label for="editPassword">New Password (optional)</label>
+                <input type="password" id="editPassword" class="input" placeholder="Leave blank to keep current">
+            </div>
+            <div class="form-group">
+                <label for="confirmPassword">Confirm New Password</label>
+                <input type="password" id="confirmPassword" class="input">
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="cancelPasswordBtn" class="btn">Cancel</button> 
+                <button type="submit" class="btn primary">Save Changes</button>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>
