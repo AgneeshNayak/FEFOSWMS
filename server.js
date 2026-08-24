@@ -1361,3 +1361,5 @@ app.listen(PORT, () => {
   console.log('📧 Email notifications: ' + (emailEnabled ? 'ENABLED ✅' : 'DISABLED ❌'));
   console.log(`🔍 Visit http://localhost:${PORT} to start using the warehouse management system\n`);
 });
+
+export default app;

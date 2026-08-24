@@ -1,5 +1,0 @@
-node_modules/
-venv/
-.env
-*.db
-.DS_Store
