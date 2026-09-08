@@ -18,7 +18,28 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const JWT_SECRET = process.env.JWT_SECRET || 'your-super-secret-jwt-key-change-in-production';
 
-app.use(cors());
+const allowedOrigins = process.env.FRONTEND_URL
+  ? process.env.FRONTEND_URL.split(',').map((url) => url.trim().replace(/\/+$/, ''))
+  : ['http://localhost:3000', 'http://localhost:5173', 'http://127.0.0.1:3000'];
+
+const corsOptions = {
+  origin: (origin, callback) => {
+    if (!origin || !process.env.FRONTEND_URL || process.env.FRONTEND_URL === '*' || allowedOrigins.includes('*')) {
+      return callback(null, true);
+    }
+    const cleanOrigin = origin.trim().replace(/\/+$/, '');
+    if (allowedOrigins.includes(cleanOrigin)) {
+      return callback(null, true);
+    }
+    return callback(null, true);
+  },
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+};
+
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ limit: '50mb', extended: true }));
 app.use(morgan('dev'));

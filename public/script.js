@@ -1,4 +1,22 @@
-// ===== Frontend JS with Authentication (MERGED) =====
+// Base API URL configuration for decoupled deployment (Vercel Frontend + Render Backend)
+const API_BASE_URL = (typeof window !== 'undefined' && (window.API_BASE_URL || window.ENV?.API_BASE_URL)) || '';
+
+function getApiUrl(path) {
+  if (!path) return '';
+  if (path.startsWith('http://') || path.startsWith('https://')) {
+    return path;
+  }
+  const baseUrl = (typeof window !== 'undefined' && window.API_BASE_URL)
+    ? window.API_BASE_URL.replace(/\/+$/, '')
+    : (API_BASE_URL ? API_BASE_URL.replace(/\/+$/, '') : '');
+
+  const cleanPath = path.startsWith('/') ? path : '/' + path;
+  return baseUrl ? `${baseUrl}${cleanPath}` : cleanPath;
+}
+
+if (typeof window !== 'undefined') {
+  window.getApiUrl = getApiUrl;
+}
 
 // Auth state management
 let currentUser = null;
@@ -15,7 +33,8 @@ const API = {
     };
 
     try {
-      const response = await fetch(path, { ...options, headers });
+      const url = getApiUrl(path);
+      const response = await fetch(url, { ...options, headers });
       
       // Handle auth errors
       if (response.status === 401) {

@@ -1,7 +1,7 @@
 {
   "name": "warehouse-management-system",
   "version": "2.0.0",
-  "description": "Warehouse Management System with local memory mode and optional PostgreSQL",
+  "description": "Warehouse Management System with PostgreSQL backend for decoupled deployment",
   "type": "module",
   "main": "server.js",
   "scripts": {
