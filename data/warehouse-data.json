@@ -41,7 +41,29 @@
       "password": "$2b$10$ZDmj87CZfTDNA4rLLUT1Se753PrawtE4JpG.76iw8yVY0ZHKxd7oa",
       "createdAt": 1784279850976,
       "createdat": 1784279850976,
-      "lastLogin": 1784280589279,
+      "lastLogin": 1795259642169,
+      "isActive": 1
+    },
+    {
+      "id": "user_1795259539103",
+      "name": "Agneesh Nayak",
+      "email": "agneeshnayak@gmail.com",
+      "company": "CEC",
+      "password": "$2b$10$YJkHXXSpo5w3aqd72S4nP.jlgqhJN22mUDB0vpdQWvnyT4uH2fv0y",
+      "createdAt": 1795259539103,
+      "createdat": 1795259539103,
+      "lastLogin": 1795259550452,
+      "isActive": 1
+    },
+    {
+      "id": "user_1795259728864",
+      "name": "Agneesh",
+      "email": "agnishnayaktrasi@gmail.com",
+      "company": "Hotel",
+      "password": "$2b$10$feZxiQXADAv/ulT4vnfVZ.F2SDNxN4i3owhfYeLF2YYMyk7r9ahja",
+      "createdAt": 1795259728864,
+      "createdat": 1795259728864,
+      "lastLogin": 1795259739968,
       "isActive": 1
     }
   ],
@@ -59,11 +81,46 @@
       "userId": "user_1784279850976",
       "userid": "user_1784279850976",
       "company": "CEC"
+    },
+    {
+      "id": "123",
+      "name": "fmcg",
+      "category": "Food",
+      "qty": 30,
+      "price": 20,
+      "expiry": "2026-11-11",
+      "low": 10,
+      "createdAt": 1795259772190,
+      "createdat": 1795259772190,
+      "userId": "user_1795259728864",
+      "userid": "user_1795259728864",
+      "company": "Hotel"
     }
   ],
   "orders": [],
   "order_items": [],
   "dispatches": [],
   "sessions": [],
-  "email_logs": []
+  "email_logs": [
+    {
+      "id": 1,
+      "userId": "user_1784279850976",
+      "userid": "user_1784279850976",
+      "email": "agneeshnayak45@gmail.com",
+      "alertCount": 1,
+      "alertcount": 1,
+      "sentAt": 1795259558176,
+      "sentat": 1795259558176
+    },
+    {
+      "id": 2,
+      "userId": "user_1795259728864",
+      "userid": "user_1795259728864",
+      "email": "agnishnayaktrasi@gmail.com",
+      "alertCount": 1,
+      "alertcount": 1,
+      "sentAt": 1795259777211,
+      "sentat": 1795259777211
+    }
+  ]
 }
